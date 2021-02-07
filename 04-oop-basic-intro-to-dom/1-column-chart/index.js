@@ -14,7 +14,7 @@ export default class ColumnChart {
     const element = document.createElement('div');
   
     element.innerHTML = `
-    <div class="column-chart" style="--chart-height: 50">
+    <div class="column-chart" style="--chart-height: ${this.chartHeight}">
       <div class="column-chart__title">
         ${this.label}
         
