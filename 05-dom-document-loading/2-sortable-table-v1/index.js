@@ -65,7 +65,7 @@ export default class SortableTable {
   getBodyTemplate(data) {
     let result = '';
     result += data.map((item) => {
-      let row = `<a href="/products/${col.id}" class="sortable-table__row">`;
+      let row = `<a href="/products/${item.id}" class="sortable-table__row">`;
       for (let col of this.header) {
         row += (col.template) ? col.template(item[col.id]) : `<div class="sortable-table__cell">${item[col.id]}</div>`;
       }
