@@ -1,11 +1,9 @@
 export default class ColumnChart {
   constructor({data = [], label = '', value = '', link = ''} = {}) {
-    
-    Object.assign(this, {data, label, value, link});
-    //this.data = data;
-    //this.label = label;
-    //this.value = value;
-    //this.link = link;
+    this.data = data;
+    this.label = label;
+    this.value = value;
+    this.link = link;
     this.chartHeight = 50;
     this.render();
     this.update(this.data);    
@@ -20,8 +18,7 @@ export default class ColumnChart {
       <div class="column-chart__title">Total ${this.label}</div>
       <div class="column-chart__container">
         <div data-element="header" class="column-chart__header">${this.value}</div>
-        <div data-element="body" class="column-chart__chart">
-        </div>
+        <div data-element="body" class="column-chart__chart"></div>
       </div>
     </div>`;
 
@@ -31,8 +28,8 @@ export default class ColumnChart {
   }
   
   update (data = []) {
-    let chart = this.element.querySelector('.column-chart__chart');
-    if (data && data.length > 0) {
+    const chart = this.element.querySelector('.column-chart__chart');
+    if (data.length > 0) {
       for (let item of data) {
         item = item * 50 / Math.max(...data);
         chart.insertAdjacentHTML('beforeend', `<div style="--value: ${ Math.floor(item)}" data-tooltip="${(item / 50 * 100).toFixed(0)}%"></div>`);
