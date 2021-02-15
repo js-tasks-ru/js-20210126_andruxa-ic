@@ -17,7 +17,7 @@ class Tooltip {
   render() {
     const div = document.createElement('div');
 
-    div.innerHTML = `<div class="tooltip">This is tooltip</div>`;
+    div.innerHTML = `<div class="tooltip" hidden>This is tooltip</div>`;
 
     this.element = div.firstElementChild;
     document.body.append(this.element);
