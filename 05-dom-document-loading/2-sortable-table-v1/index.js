@@ -37,14 +37,11 @@ export default class SortableTable {
   }
  
   getHeaderTemplate(header) {
-    let result = '';
-    for (let col of header) {
-      result += `
-        <div class="sortable-table__cell" data-id="${col.id}" data-sortable="${col.sortable}">
+    return header.map((col) => {
+      return `<div class="sortable-table__cell" data-id="${col.id}" data-sortable="${col.sortable}">
           <span>${col.title}</span>
-        </div>`;      
-    }
-    return result;
+        </div>`;
+    }).join('');      
   }
 
   addArrow(fieldId, order) {

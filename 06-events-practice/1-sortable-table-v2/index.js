@@ -43,14 +43,11 @@ export default class SortableTable {
     }
    
     getHeaderTemplate(header) {
-      let result = '';
-      for (let col of header) {
-        result += `
-          <div class="sortable-table__cell" data-id="${col.id}" data-sortable="${col.sortable}">
+      return header.map((col) => {
+        return `<div class="sortable-table__cell" data-id="${col.id}" data-sortable="${col.sortable}">
             <span>${col.title}</span>
-          </div>`;      
-      }
-      return result;
+          </div>`;
+      }).join('');      
     }
   
     addArrow(fieldId, order) {
@@ -69,8 +66,7 @@ export default class SortableTable {
     }
   
     getBodyTemplate(data) {
-      let result = '';
-      result += data.map((item) => {
+      return data.map((item) => {
         let row = `<a href="/products/${item.id}" class="sortable-table__row">`;
         for (let col of this.header) {
           row += (col.template) ? col.template(item[col.id]) : `<div class="sortable-table__cell">${item[col.id]}</div>`;
@@ -78,8 +74,6 @@ export default class SortableTable {
         row += '</a>';
         return row;
       }).join('');
-  
-      return result;
     }
   
     update(data) {
@@ -130,7 +124,7 @@ export default class SortableTable {
     }  
   
     customSorting() {
-        
+      return;
     }
 
     remove() {
@@ -139,6 +133,5 @@ export default class SortableTable {
   
     destroy() {
       this.remove();
-      this.subElements.header.removeEventListener('click', this.bindSort);      
     }
 }
