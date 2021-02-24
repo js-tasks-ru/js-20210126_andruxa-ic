@@ -12,13 +12,12 @@ class Tooltip {
 
     document.addEventListener('pointerover', this.bindShow);    
     document.addEventListener('pointerout', this.bindHide);
-    document.addEventListener('mousemove', this.bindMove);
   }
 
   render() {
     const div = document.createElement('div');
 
-    div.innerHTML = `<div class="tooltip">This is tooltip</div>`;
+    div.innerHTML = `<div class="tooltip" hidden>This is tooltip</div>`;
 
     this.element = div.firstElementChild;
     document.body.append(this.element);
@@ -29,18 +28,21 @@ class Tooltip {
     document.body.append(this.element);
     this.element.hidden = false;
     this.updateText(event.target.dataset.tooltip);
+    document.addEventListener('mousemove', this.bindMove);
   }
 
   moveTooltip(event) {
+    const gap = 5;
     this.element.style.position = 'absolute';
-    this.element.style.left = event.clientX + 5 + 'px';
-    this.element.style.top = event.clientY + 5 + 'px';
+    this.element.style.left = event.clientX + gap + 'px';
+    this.element.style.top = event.clientY + gap + 'px';
   }
 
   hide(event) {
     if (!event.target.hasAttribute('data-tooltip')) {return;}
     this.element.remove(); 
     this.element.hidden = true;
+    document.removeEventListener('mousemove', this.bindMove);    
   }
 
   updateText(text) {
