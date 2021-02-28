@@ -15,6 +15,8 @@ export default class Page {
   updateRange = async ({detail}) => {
     const {from, to} = detail;
 
+    this.progressBar.hidden = false;
+
     this.charts.forEach(chart => {
       chart.loadData(from, to);
     });
@@ -24,6 +26,8 @@ export default class Page {
 
     const {id, order} = this.sortableTable.sorted;
     this.sortableTable.sortOnServer(id, order);
+
+    this.progressBar.hidden = true;
   };
 
   constructor () {
@@ -91,6 +95,8 @@ export default class Page {
   }
 
   render() {
+    this.progressBar = document.body.querySelector('.progress-bar');
+    this.progressBar.hidden = false;
     const div = this.makeDiv(['dashboard', 'full-height', 'flex-column']);
 
     div.append(this.topPanel);
@@ -100,6 +106,7 @@ export default class Page {
 
     this.element = div;
     
+    this.progressBar.hidden = true;
     return this.element;
   }
 
